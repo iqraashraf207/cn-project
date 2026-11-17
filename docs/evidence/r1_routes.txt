@@ -1,0 +1,3 @@
+10.0.1.0/24 dev br0 proto kernel scope link src 10.0.1.1 
+10.0.3.0/24 via 10.0.12.2 dev veth-r1 
+10.0.12.0/30 dev veth-r1 proto kernel scope link src 10.0.12.1 
