@@ -23,3 +23,11 @@
 - Responses carry X-Cache: HIT / MISS / REVALIDATE_304 / REVALIDATE_200 / BYPASS for easy checking.
 
 - Admin: GET http://<proxy>:8888/__clear empties the cache and the log (used between experiment runs).
+
+- Client side: persistent connections. A client connection stays open for further requests unless the client sends Connection: close (or HTTP/1.0 without keep-alive). Idle timeout 15 s (--idle).
+
+- Origin side: a pool of idle persistent connections per origin (host, port). A pooled connection is dropped if idle more than 3 s (the origin closes idle connections after 5 s). A failed pooled GET/HEAD is retried once on a fresh connection. POST is never retried. --no-upstream-keepalive turns the pool off.
+
+- Admin endpoints on the proxy port: /__clear empties cache, upstream pool, stats and log; /__stats prints upstream_connects and upstream_reused.
+
+- Why it matters: with a pool, a cache miss page costs 1 RTT per object like direct persistent HTTP (22 RTT for 21 requests). Without it, each miss costs 2 RTT (42 RTT total).
