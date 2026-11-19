@@ -1,0 +1,8 @@
+label,mode,rtt_ms,runs,mean_s,stdev_s,min_s,max_s,connections,model_s,diff_vs_model
+direct,nonpersistent,20,5,1.3818,0.3598,1.0942,1.9987,21.0,0.840,+64.5%
+direct,persistent,20,5,0.7428,0.1224,0.6379,0.9432,1.0,0.440,+68.8%
+direct,nonpersistent,100,5,5.0788,0.0847,4.9637,5.1978,21.0,4.200,+20.9%
+direct,persistent,100,5,2.4611,0.1851,2.2826,2.7540,1.0,2.200,+11.9%
+direct,nonpersistent,200,5,9.1108,0.2125,8.8541,9.3291,21.0,8.400,+8.5%
+direct,persistent,200,5,4.6963,0.1311,4.5407,4.8980,1.0,4.400,+6.7%
+
