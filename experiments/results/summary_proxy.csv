@@ -1,0 +1,8 @@
+label,mode,rtt_ms,runs,mean_s,stdev_s,min_s,max_s,connections,model_s,diff_vs_model
+proxy_empty,persistent,20,5,1.3023,0.2968,0.9487,1.7009,1.0,0.440,+196.0%
+proxy_warm,persistent,20,5,0.0221,0.0110,0.0060,0.0364,1.0,-,-
+proxy_empty,persistent,100,5,2.9000,0.3410,2.5115,3.2291,1.0,2.200,+31.8%
+proxy_warm,persistent,100,5,0.0352,0.0254,0.0150,0.0774,1.0,-,-
+proxy_empty,persistent,200,5,5.2669,0.3264,4.7894,5.6695,1.0,4.400,+19.7%
+proxy_warm,persistent,200,5,0.0247,0.0133,0.0121,0.0436,1.0,-,-
+

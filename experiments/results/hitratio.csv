@@ -1,0 +1,6 @@
+label,mode,proxy,rtt_ms,run,load_time_s,connections,requests,bytes,all_ok
+hitratio,persistent,yes,100,1,3.6486,1,21,205722,True
+hitratio,persistent,yes,100,2,0.0496,1,21,205722,True
+hitratio,persistent,yes,100,3,0.0064,1,21,205722,True
+hitratio,persistent,yes,100,4,0.0251,1,21,205722,True
+hitratio,persistent,yes,100,5,0.0362,1,21,205722,True
