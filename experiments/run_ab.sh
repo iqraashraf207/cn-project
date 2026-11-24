@@ -22,7 +22,7 @@ if [ "$TARGET" = proxy ]; then
   ip netns exec client curl -s -o /dev/null -x http://10.0.1.20:8888 $URL   # warm the cache
 fi
 
-echo "target,keepalive,concurrency,run,requests_per_sec,time_per_request_ms,failed,keepalive_requests" > $OUT
+echo "target,keepalive,concurrency,run,requests_per_sec,time_per_request_ms,failed,keepalive_requests,non2xx" > $OUT
 for C in 1 10 50; do
   for KA in no yes; do
     KFLAG=""
@@ -33,7 +33,8 @@ for C in 1 10 50; do
       TPR=$(echo "$RES" | awk '/^Time per request/ && /\(mean\)/ {print $4}')
       FAIL=$(echo "$RES" | awk '/^Failed requests/ {print $3}')
       KAR=$(echo "$RES" | awk '/^Keep-Alive requests/ {print $3}')
-      echo "$TARGET,$KA,$C,$R,${RPS:-NA},${TPR:-NA},${FAIL:-NA},${KAR:-0}" | tee -a $OUT
+      N2=$(echo "$RES" | awk '/^Non-2xx responses/ {print $3}')
+      echo "$TARGET,$KA,$C,$R,${RPS:-NA},${TPR:-NA},${FAIL:-NA},${KAR:-0},${N2:-0}" | tee -a $OUT
       sleep 2
     done
   done

@@ -1,0 +1,38 @@
+Set 50ms on each side (RTT ~ 100ms). Verify with ping.
+Cache, pool, stats and log cleared
+== Visit 1: empty cache (expect 21 MISS)
+run 1: load_time=3.0349s connections=1 requests=21 bytes=205722 all_ok=True
+== Visit 2: straight away (expect 21 HIT, very fast)
+run 1: load_time=0.0112s connections=1 requests=21 bytes=205722 all_ok=True
+== Waiting 6 s so every entry becomes stale (TTL is 5 s)
+== Visit 3: nothing changed (expect 21 REVALIDATE_304)
+run 1: load_time=3.3600s connections=1 requests=21 bytes=205722 all_ok=True
+== Changing 5 objects (obj01..obj05), then waiting 6 s
+== Visit 4: (expect 5 REVALIDATE_200 and 16 REVALIDATE_304)
+run 1: load_time=3.2313s connections=1 requests=21 bytes=205722 all_ok=True
+
+Visit 1 results:
+     21 MISS
+Visit 2 results:
+     21 HIT
+Visit 3 results:
+     21 REVALIDATE_304
+Visit 4 results:
+      5 REVALIDATE_200
+     16 REVALIDATE_304
+
+HIT             21
+MISS            21
+REVALIDATE_304  37
+REVALIDATE_200  5
+BYPASS          0
+GET requests    84
+Bytes to clients 845055
+Cache hit ratio = (HIT + REVALIDATE_304) / GETs = 0.690
+
+== Bytes saved by one 304 (obj06.dat, fetched directly from the origin)
+Full 200: headers=266 body=10240 total=10506 bytes
+304:      headers=213 body=0 total=213 bytes
+Saved per 304 = 10293 bytes
+304 responses in this experiment's log = 37  ->  total saved = 380841 bytes
+Delay removed.

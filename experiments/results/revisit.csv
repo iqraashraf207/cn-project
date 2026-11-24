@@ -1,5 +1,5 @@
 label,mode,proxy,rtt_ms,run,load_time_s,connections,requests,bytes,all_ok
-revisit1_empty,persistent,yes,100,1,2.4774,1,21,205722,True
-revisit2_fresh,persistent,yes,100,1,0.0276,1,21,205722,True
-revisit3_stale_unchanged,persistent,yes,100,1,2.6239,1,21,205722,True
-revisit4_stale_5changed,persistent,yes,100,1,2.4875,1,21,205722,True
+revisit1_empty,persistent,yes,100,1,3.0349,1,21,205722,True
+revisit2_fresh,persistent,yes,100,1,0.0112,1,21,205722,True
+revisit3_stale_unchanged,persistent,yes,100,1,3.3600,1,21,205722,True
+revisit4_stale_5changed,persistent,yes,100,1,3.2313,1,21,205722,True
