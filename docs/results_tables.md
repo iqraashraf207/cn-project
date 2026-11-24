@@ -4,16 +4,16 @@
 
 | RTT (ms) | Case | Runs | Mean (s) | Std dev (s) | Range (s) | TCP conns | Model (s) | Diff vs model | Extra ms per request | All 200 OK |
 |---|---|---|---|---|---|---|---|---|---|---|
-| 20 | Direct, new connection per object | 5 | 1.382 | 0.360 | 1.094-1.999 | 21 | 0.840 | +64.5% | 25.8 | yes |
-| 20 | Direct, persistent connection | 5 | 0.743 | 0.122 | 0.638-0.943 | 1 | 0.440 | +68.8% | 14.4 | yes |
+| 20 | Direct, new connection per object | 5 | 2.066 | 0.805 | 0.955-2.720 | 21 | 0.840 | +145.9% | 58.4 | yes |
+| 20 | Direct, persistent connection | 5 | 0.666 | 0.195 | 0.537-0.995 | 1 | 0.440 | +51.5% | 10.8 | yes |
 | 20 | Via proxy, empty cache | 5 | 1.302 | 0.297 | 0.949-1.701 | 1 | 0.440 | +196.0% | 41.1 | yes |
 | 20 | Via proxy, warm cache | 5 | 0.022 | 0.011 | 0.006-0.036 | 1 | - | - | - | yes |
-| 100 | Direct, new connection per object | 5 | 5.079 | 0.085 | 4.964-5.198 | 21 | 4.200 | +20.9% | 41.8 | yes |
-| 100 | Direct, persistent connection | 5 | 2.461 | 0.185 | 2.283-2.754 | 1 | 2.200 | +11.9% | 12.4 | yes |
+| 100 | Direct, new connection per object | 5 | 5.467 | 0.501 | 4.947-6.252 | 21 | 4.200 | +30.2% | 60.3 | yes |
+| 100 | Direct, persistent connection | 5 | 2.705 | 0.444 | 2.416-3.485 | 1 | 2.200 | +22.9% | 24.0 | yes |
 | 100 | Via proxy, empty cache | 5 | 2.900 | 0.341 | 2.511-3.229 | 1 | 2.200 | +31.8% | 33.3 | yes |
 | 100 | Via proxy, warm cache | 5 | 0.035 | 0.025 | 0.015-0.077 | 1 | - | - | - | yes |
-| 200 | Direct, new connection per object | 5 | 9.111 | 0.213 | 8.854-9.329 | 21 | 8.400 | +8.5% | 33.8 | yes |
-| 200 | Direct, persistent connection | 5 | 4.696 | 0.131 | 4.541-4.898 | 1 | 4.400 | +6.7% | 14.1 | yes |
+| 200 | Direct, new connection per object | 5 | 10.674 | 0.841 | 9.430-11.630 | 21 | 8.400 | +27.1% | 108.3 | yes |
+| 200 | Direct, persistent connection | 5 | 5.083 | 0.348 | 4.777-5.684 | 1 | 4.400 | +15.5% | 32.5 | yes |
 | 200 | Via proxy, empty cache | 5 | 5.267 | 0.326 | 4.789-5.670 | 1 | 4.400 | +19.7% | 41.3 | yes |
 | 200 | Via proxy, warm cache | 5 | 0.025 | 0.013 | 0.012-0.044 | 1 | - | - | - | yes |
 
@@ -21,9 +21,9 @@
 
 | RTT (ms) | Non-persistent / persistent | Seconds saved by persistence | Proxy empty vs direct persistent | Warm proxy speed-up vs direct persistent | Load-time reduction (warm proxy) |
 |---|---|---|---|---|---|
-| 20 | 1.86x (model 1.91x) | 0.64 | +75.3% | 34x | 97.0% |
-| 100 | 2.06x (model 1.91x) | 2.62 | +17.8% | 70x | 98.6% |
-| 200 | 1.94x (model 1.91x) | 4.41 | +12.1% | 190x | 99.5% |
+| 20 | 3.10x (model 1.91x) | 1.40 | +95.4% | 30x | 96.7% |
+| 100 | 2.02x (model 1.91x) | 2.76 | +7.2% | 77x | 98.7% |
+| 200 | 2.10x (model 1.91x) | 5.59 | +3.6% | 206x | 99.5% |
 
 ## Repeat visits (RTT 100 ms, TTL 5 s)
 

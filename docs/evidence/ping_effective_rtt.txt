@@ -1,0 +1,6 @@
+== nominal RTT 20 ms
+rtt min/avg/max/mdev = 20.985/44.323/298.561/61.051 ms
+== nominal RTT 100 ms
+rtt min/avg/max/mdev = 100.860/112.535/154.264/17.792 ms
+== nominal RTT 200 ms
+rtt min/avg/max/mdev = 201.692/250.959/465.750/68.067 ms
