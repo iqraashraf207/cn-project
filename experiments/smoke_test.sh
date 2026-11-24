@@ -33,9 +33,10 @@ for t in "client 10.0.1.1" "client 10.0.1.20" "client 10.0.3.10" "origin 10.0.1.
   else check "ping $1 -> $2" ok unreachable; fi
 done
 ./topology/set_rtt.sh 20 > /dev/null
-AVG=$($C ping -c 5 -q 10.0.3.10 | awk -F/ '/^rtt/ {print $5}')
-if awk -v a="${AVG:-0}" 'BEGIN{exit !(a>=19 && a<=26)}'; then check "RTT with netem 20 ms (measured ${AVG} ms)" ok ok
-else check "RTT with netem 20 ms" "19-26 ms" "${AVG:-none} ms"; fi
+
+MIN=$($C ping -c 10 -i 0.2 -q 10.0.3.10 | awk -F'[ /]' '/^rtt/ {print $7}')
+if awk -v a="${MIN:-0}" 'BEGIN{exit !(a>=19 && a<=24)}'; then check "RTT with netem 20 ms (min of 10 pings: ${MIN} ms)" ok ok
+else check "RTT with netem 20 ms (min of 10 pings)" "19-24 ms" "${MIN:-none} ms"; fi
 
 echo "== Origin server (direct)"
 R=$($C python3 client/client.py --mode persistent | grep '^run')
