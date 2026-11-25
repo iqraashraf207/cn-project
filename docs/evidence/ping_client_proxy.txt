@@ -1,0 +1,4 @@
+== client -> proxy (inside LAN-A, delay set to 100 ms on the transit link)
+rtt min/avg/max/mdev = 0.075/0.117/0.356/0.080 ms
+== client -> origin (crosses the delayed link)
+rtt min/avg/max/mdev = 101.842/129.792/275.268/50.930 ms
