@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""Builds docs/report/report.docx from the section files.
-Usage (from anywhere): python3 docs/report/build_report.py [--no-pandoc]"""
+"""builds docs/report/report.docx from the section files"""
 import csv
 import os
 import re
