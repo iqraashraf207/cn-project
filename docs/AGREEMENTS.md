@@ -1,4 +1,4 @@
-## Origin server details (added Day 2)
+## Origin server details
 - GET / returns index.html (200). GET /old.html returns 301 with Location: /index.html.
 - POST to any path returns 200 with the text "Received N bytes".
 - Unsupported methods return 405; malformed requests return 400.
