@@ -1,7 +1,6 @@
 #!/bin/bash
-# Usage: sudo ./experiments/count_connections.sh persistent|nonpersistent [rtt_ms]
-# Needs: topology up, origin server running. Counts the TCP connections of ONE page load two ways:
-#  (1) distinct client ports seen by sampling 'ss'  (2) SYN packets in a tcpdump capture.
+# needs topology up, origin server running. 
+# counts the TCP connections of ONE page load two ways: (1)distinct client ports seen by sampling 'ss', (2)SYN packets in a tcpdump capture
 if [ "$EUID" -ne 0 ]; then echo "Run with sudo"; exit 1; fi
 cd "$(dirname "$0")/.."
 MODE=$1
