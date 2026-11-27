@@ -1,6 +1,5 @@
 #!/bin/bash
-# Usage: sudo ./experiments/run_revisit.sh
-# Needs: topology up, origin server running, proxy running with --ttl 5 --quiet.
+# needs topology up, origin server running, proxy running with --ttl 5 --quiet
 if [ "$EUID" -ne 0 ]; then echo "Run with sudo"; exit 1; fi
 cd "$(dirname "$0")/.."
 RTT=100
