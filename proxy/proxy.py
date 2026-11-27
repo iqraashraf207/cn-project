@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
-"""Caching HTTP proxy on plain sockets.
-Persistent client connections (keep-alive) and a pool of persistent upstream connections.
-Cache: TTL, conditional GET (If-None-Match / If-Modified-Since), request log.
-Limits: chunked responses unsupported, no pipelining, only GET is cached."""
+"""caching HTTP proxy on plain sockets
+persistent client connections (keep-alive) and a pool of persistent upstream connections.
+Cache: TTL, conditional GET (if-none-match / if-modified-since), request log. Limits: chunked responses unsupported, no pipelining, only GET is cached"""
 import argparse
 import email.utils
 import os
@@ -87,7 +86,7 @@ def parse_headers(lines):
 
 
 def read_head(sock, data=b""):
-    """Read until the blank line. Return (head_bytes, leftover) or (None, b'')."""
+    """read until the blank line and return (head_bytes, leftover) or (none, b'')"""
     while b"\r\n\r\n" not in data:
         chunk = sock.recv(BUFSZ)
         if not chunk:
@@ -105,7 +104,7 @@ def send_simple(csock, code, reason, text, keep=False):
 
 
 def read_response(us, method):
-    """Read one response from the origin. Adds 'reusable' = connection may be kept."""
+    """read one response from the origin. adds 'reusable' = connection may be kept"""
     head, rest = read_head(us)
     if head is None:
         raise OSError("bad response from origin")
@@ -144,7 +143,7 @@ def read_response(us, method):
 
 
 def fetch_origin(method, host, port, path, headers, body=b""):
-    """One request to the origin, reusing a pooled connection when possible."""
+    """one request to the origin reusing a pooled connection when possible"""
     use_pool = CONFIG["upstream_ka"]
     out = (f"{method} {path} HTTP/1.1\r\nHost: {host}:{port}\r\n"
            f"Connection: {'keep-alive' if use_pool else 'close'}\r\n")
@@ -177,7 +176,7 @@ def fetch_origin(method, host, port, path, headers, body=b""):
 
 
 def freshness(hdrs):
-    """Return (cacheable, lifetime_seconds)."""
+    """return (cacheable, lifetime_seconds)"""
     hd = {k.lower(): v for k, v in hdrs}
     directives = [d.strip() for d in hd.get("cache-control", "").lower().split(",") if d.strip()]
     if "no-store" in directives or "private" in directives:
