@@ -1,7 +1,7 @@
 # HTTP/1.1 Web Server and Caching Proxy from Sockets
 
 Course: Computer Networks
-Members: Samiya Khan (24K-0768), Iqra Ashraf (24K-0952), Aseelah Masood Khan (24K-0881).
+Members: Iqra Ashraf (24K-0952), Samiya Khan (24K-0768), Aseelah Masood (24K-0881).
 
 ## What this project does
 We built an HTTP/1.1 web server and a caching proxy using only plain TCP sockets in Python. We run them on a small
