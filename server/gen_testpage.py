@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
-"""Generates the test page (index.html + 20 objects of 10 KB each) in server/www/."""
+"""generates the test page (index.html + 20 objects of 10 KB each) in server/www/."""
 import os
 import random
 
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "www")
 N_OBJECTS = 20
-OBJ_SIZE = 10240  # bytes
+OBJ_SIZE = 10240  #bytes
 
 os.makedirs(OUT, exist_ok=True)
-random.seed(42)  # same bytes every time
+random.seed(42)  #same bytes every time
 
 for i in range(1, N_OBJECTS + 1):
     with open(os.path.join(OUT, f"obj{i:02d}.dat"), "wb") as f:
