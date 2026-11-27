@@ -1,6 +1,6 @@
 #!/bin/bash
 # Usage: sudo ./topology/set_rtt.sh <RTT_ms>   (0 removes delay)
-# Half of the RTT is applied on each side of the transit link.
+# half of the RTT is applied on each side of the transit link
 if [ "$EUID" -ne 0 ]; then echo "Run with sudo"; exit 1; fi
 if [ -z "$1" ]; then echo "Usage: sudo $0 <RTT_ms>"; exit 1; fi
 RTT=$1
