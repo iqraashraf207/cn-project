@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Summarise proxy.log. Usage: python3 proxy/analyze_log.py [logfile]"""
+"""summarise proxy.log"""
 import os
 import sys
 from collections import Counter
