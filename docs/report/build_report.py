@@ -1,8 +1,5 @@
 #!/usr/bin/env python3
 """Builds docs/report/report.docx from the section files.
-Placeholders inside the section files:
-   @@TABLE:name@@   -> a results table made from experiments/results (names listed below)
-   @@FILE:path@@    -> the text of a file (path from the project root) as a code block
 Usage (from anywhere): python3 docs/report/build_report.py [--no-pandoc]"""
 import csv
 import os
