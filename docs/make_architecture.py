@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Draws docs/architecture.png (topology, addresses, ports, interfaces, protocol flows)."""
+"""draws docs/architecture.png(topology, addresses, ports, interfaces, protocol flows)"""
 import os
 import matplotlib
 matplotlib.use("Agg")
@@ -21,7 +21,7 @@ def box(x, y, w, h, text, fc="#eef3fb", ec="#2b4a7a", fs=10, bold_first=True):
             linespacing=1.5)
 
 
-# LAN-A background
+#LAN-A background
 ax.add_patch(Rectangle((0.2, 1.9), 7.2, 5.4, fc="#f7fbf2", ec="#5b8a3c", lw=1.4, ls="--"))
 ax.text(0.4, 7.15, "LAN-A  10.0.1.0/24  (no added delay)", fontsize=11, color="#3d6b25", va="top",
         fontweight="bold")
@@ -34,7 +34,7 @@ box(4.3, 2.3, 3.0, 4.3, "R1 (ns: r1)\nip_forward = 1\nbridge br0  10.0.1.1/24\n(
 box(9.3, 2.3, 3.0, 4.3, "R2 (ns: r2)\nip_forward = 1\nveth-r2  10.0.12.2/30\n(transit side)\n\nveth-r2o  10.0.3.1/24\n(LAN-C side)\nroute 10.0.1.0/24\nvia 10.0.12.1")
 box(13.8, 3.0, 3.1, 2.6, "Origin server (ns: origin)\nveth-o  10.0.3.10/24\nTCP 8080 (configurable)\ngw 10.0.3.1")
 
-# links
+#links
 for (x1, y1, x2, y2) in [(3.3, 5.75, 4.3, 5.75), (3.3, 3.25, 4.3, 3.25)]:
     ax.plot([x1, x2], [y1, y2], color="#444", lw=2)
 ax.text(3.8, 5.95, "veth", fontsize=8, ha="center")
@@ -46,7 +46,7 @@ ax.text(8.3, 3.85, "20 / 100 / 200 ms RTT", ha="center", fontsize=9, color="#c03
 ax.plot([12.3, 13.8], [4.3, 4.3], color="#444", lw=2)
 ax.text(13.05, 4.5, "veth", fontsize=8, ha="center")
 
-# proxy-mode flows
+#proxy-mode flows
 ax.annotate("", xy=(1.9, 4.2), xytext=(1.9, 4.9),
             arrowprops=dict(arrowstyle="<->", color="#1f6fb2", lw=2.2))
 ax.text(2.05, 4.55, "HTTP/1.1 :8888", fontsize=9, color="#1f6fb2", va="center")
@@ -56,7 +56,7 @@ ax.annotate("", xy=(16.0, 3.0), xytext=(16.0, 1.1),
 ax.text(8.9, 0.8, "Proxy mode, leg 2: proxy -> origin, HTTP/1.1 to TCP 8080 (conditional GET with "
         "If-None-Match / If-Modified-Since), crosses the delayed link", ha="center", fontsize=9,
         color="#1f6fb2")
-# direct-mode flow
+#direct-mode flow
 ax.plot([1.2, 1.2, 15.3], [6.6, 8.3, 8.3], color="#7d3c98", lw=2.2, ls="--")
 ax.annotate("", xy=(15.3, 5.6), xytext=(15.3, 8.3),
             arrowprops=dict(arrowstyle="->", color="#7d3c98", lw=2.2, ls="--"))
