@@ -1,6 +1,5 @@
 #!/bin/bash
-# Usage: sudo ./experiments/run_direct.sh [runs]     (default 5 runs per case)
-# Needs: topology up, origin server running inside the origin namespace.
+# needs topology up, origin server running inside the origin namespace
 if [ "$EUID" -ne 0 ]; then echo "Run with sudo"; exit 1; fi
 cd "$(dirname "$0")/.."
 RUNS=${1:-5}
