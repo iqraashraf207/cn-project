@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
-"""HTTP/1.1 origin server on plain TCP sockets.
-Methods: GET, HEAD, POST.  Status: 200, 301, 304, 404 (+400, 405, 500).
-Features: Content-Length, keep-alive, conditional GET (ETag / If-Modified-Since), thread pool."""
+"""HTTP/1.1 origin server on plain TCP sockets
+Methods: GET, HEAD, POST.  Status: 200, 301, 304, 404 (+400, 405, 500). Features: Content-Length, keep-alive, conditional GET (ETag / If-Modified-Since), thread pool"""
 import argparse
 import email.utils
 import mimetypes
@@ -29,7 +28,7 @@ def log(args, client, method, path, status, nbytes):
 
 
 def read_request(rfile):
-    """return (method, target, version, headers, body), or none if the client closed."""
+    """return (method, target, version, headers, body), or none if the client closed"""
     line = rfile.readline(65537)
     while line in (b"\r\n", b"\n"):
         line = rfile.readline(65537)
@@ -67,7 +66,7 @@ def make_response(status, headers, body=b"", head_only=False):
 
 
 def handle_request(args, root, req, client):
-    """return (response_bytes, keep_alive)."""
+    """return (response_bytes, keep_alive)"""
     method, target, version, h, body = req
     tokens = h.get("connection", "").lower()
     if version == "HTTP/1.1":
