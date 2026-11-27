@@ -145,7 +145,7 @@ ApacheBench uses HTTP/1.0 without keep-alive by default, so the `-k` option was 
 
 - Every page-load case has 5 runs, not just the minimum of 3.
 - Throughput was measured at RTT 0 (no delay) so that it shows the speed of the programs and not of the network.
-- The proxy keeps a pool of persistent connections to the origin. This was not in the proposal; it is needed because, without it, every cache miss would pay a new TCP handshake, and the proxy would look about 1.6 times slower than direct persistent HTTP.
+- The proxy keeps a pool of persistent connections to the origin. This was not in the proposal; it is needed because, without it, every cache miss would pay a new TCP handshake, and a cache miss would be about 1.6 times slower (4.77 s against 2.90 s at 100 ms).
 - The proxy TTL was 3600 s for the page-load matrix (so entries stay fresh) and 5 s for the repeat-visit experiment (so entries become stale quickly).
 - The optional extras of the proposal (packet loss, bandwidth limits, parallel connections) were not done.
 

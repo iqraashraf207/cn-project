@@ -9,6 +9,6 @@
 7. Wireshark User's Guide, wireshark.org.
 8. Apache HTTP Server documentation: ab (ApacheBench).
 
-# Appendix B: Repository and Reproduction {-}
+# Repository and Reproduction {-}
 
 Source code, scripts, results, captures and the README are in the public project repository: https://github.com/iqraashraf207/cn-project. The README explains how another group can set up the topology and repeat every experiment. The command `sudo ./experiments/smoke_test.sh` runs an automatic end-to-end check.
