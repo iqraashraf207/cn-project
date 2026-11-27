@@ -1,4 +1,4 @@
-"""Run once, from the project root, after build_report.py exists:  python3 docs/report/patch_ab_table.py"""
+"""run once from the project root after build_report.py exists"""
 import os
 p = os.path.join(os.path.dirname(os.path.abspath(__file__)), "build_report.py")
 if not os.path.exists(p):
