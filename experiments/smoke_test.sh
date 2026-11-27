@@ -1,6 +1,5 @@
 #!/bin/bash
-# Usage: sudo ./experiments/smoke_test.sh
-# Builds the topology, starts origin + proxy, runs end-to-end checks, tears everything down.
+#builds the topology, starts origin + proxy, runs end-to-end checks, tears everything down
 if [ "$EUID" -ne 0 ]; then echo "Run with sudo"; exit 1; fi
 cd "$(dirname "$0")/.."
 PASS=0; FAIL=0
