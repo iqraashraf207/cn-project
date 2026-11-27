@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""Reads experiments/results/*.csv and logs. Writes docs/figures/*.png and docs/results_tables.md.
-Usage (from the project root): python3 experiments/make_plots.py"""
+"""reads experiments/results/*.csv and logs and writes docs/figures/*.png and docs/results_tables.md"""
 import csv
 import os
 import re
@@ -61,7 +60,7 @@ def save(fig, name):
     print("wrote", path)
 
 
-# ---------------------------------------------------------------- page load
+# page load
 CASES = [("direct", "nonpersistent", "Direct, new connection per object", 42, "#c0392b"),
          ("direct", "persistent", "Direct, persistent connection", 22, "#2980b9"),
          ("proxy_empty", "persistent", "Via proxy, empty cache", 22, "#8e44ad"),
@@ -79,7 +78,7 @@ for lab, mode, name, k, col in CASES:
                                            ok=all(r["all_ok"] == "True" for r in rs))
 
 if stats:
-    # Figure 1: grouped bars, linear and log scale
+    # figure 1: grouped bars, linear and log scale
     fig, axes = plt.subplots(1, 2, figsize=(14, 5.5))
     for ax, log in zip(axes, (False, True)):
         w = 0.2
@@ -109,7 +108,7 @@ if stats:
     fig.suptitle("Mean of the runs, error bars = standard deviation, black dash = textbook model")
     save(fig, "fig1_page_load_time.png")
 
-    # Figure 2: measured vs model (lines)
+    # figure 2: measured vs model (lines)
     fig, ax = plt.subplots(figsize=(8, 5.5))
     xs = [0] + RTTS
     ax.plot(xs, [0] + [42 * r / 1000 for r in RTTS], "--", color="#c0392b", label="Model: 42 RTT (non-persistent)")
@@ -126,7 +125,7 @@ if stats:
     ax.legend(fontsize=8)
     save(fig, "fig2_measured_vs_model.png")
 
-    # Figure 3: TCP connections per page
+    # figure 3: TCP connections per page
     fig, ax = plt.subplots(figsize=(8, 5))
     labels, vals, cols = [], [], []
     for lab, mode, name, k, col in CASES:
@@ -144,7 +143,7 @@ if stats:
     ax.tick_params(axis="x", labelsize=8)
     save(fig, "fig3_connections_per_page.png")
 
-    # Tables
+    # tables
     md += ["## Page load time (mean of runs; model = textbook RTT count x RTT)", ""]
     trs = []
     for rtt in RTTS:
@@ -175,7 +174,7 @@ if stats:
            "Proxy empty vs direct persistent", "Warm proxy speed-up vs direct persistent",
            "Load-time reduction (warm proxy)"], drs)
 
-# ---------------------------------------------------------------- revisit (conditional GET)
+# revisit (conditional GET)
 rv = read_csv("revisit.csv")
 rlog = read_log("revisit_proxy.log")
 if rv and len(rlog) >= 84:
@@ -202,7 +201,7 @@ if rv and len(rlog) >= 84:
 elif rv or rlog:
     print("revisit files incomplete: need 4 rows and 84 log lines")
 
-# ---------------------------------------------------------------- cache hit ratio
+# cache hit ratio
 hl = read_log("hitratio_proxy.log")
 gets = [p for p in hl if p[1] == "GET"]
 if len(gets) >= 21:
@@ -229,7 +228,7 @@ if len(gets) >= 21:
     table(["Page load", "Hits", "Misses"], [[i + 1, h, m] for i, (h, m) in enumerate(zip(hits, miss))])
     md += [f"Overall: (HIT + REVALIDATE_304) / GET = {total:.3f} over {len(gets)} GET requests.", ""]
 
-# ---------------------------------------------------------------- ApacheBench
+# ApacheBench
 abrows = {t: read_csv(f"ab_{t}.csv") for t in ("server", "proxy")}
 if any(abrows.values()):
     fig, axes = plt.subplots(1, 2, figsize=(13, 5.5))
@@ -275,7 +274,7 @@ if any(abrows.values()):
     table(["Target", "Concurrency", "Keep-alive", "Runs", "Median req/s", "Min-max", "Mean"],
           sorted(trs, key=lambda x: (x[0], x[1], x[2])))
 
-# ---------------------------------------------------------------- bytes saved by 304
+# bytes saved by 304
 bs = os.path.join(ROOT, "docs", "evidence", "revisit_output.txt")
 if os.path.exists(bs):
     txt = open(bs).read()
