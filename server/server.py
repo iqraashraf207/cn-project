@@ -29,9 +29,9 @@ def log(args, client, method, path, status, nbytes):
 
 
 def read_request(rfile):
-    """Return (method, target, version, headers, body), or None if the client closed."""
+    """return (method, target, version, headers, body), or none if the client closed."""
     line = rfile.readline(65537)
-    while line in (b"\r\n", b"\n"):          # ignore stray blank lines
+    while line in (b"\r\n", b"\n"):
         line = rfile.readline(65537)
     if not line:
         return None
@@ -67,13 +67,13 @@ def make_response(status, headers, body=b"", head_only=False):
 
 
 def handle_request(args, root, req, client):
-    """Return (response_bytes, keep_alive)."""
+    """return (response_bytes, keep_alive)."""
     method, target, version, h, body = req
     tokens = h.get("connection", "").lower()
     if version == "HTTP/1.1":
-        keep = "close" not in tokens                 # HTTP/1.1: persistent by default
+        keep = "close" not in tokens            
     else:
-        keep = "keep-alive" in tokens                # HTTP/1.0: only if asked (ab -k)
+        keep = "keep-alive" in tokens              
     if args.no_keepalive:
         keep = False
 
@@ -120,7 +120,7 @@ def handle_request(args, root, req, client):
     inm = h.get("if-none-match")
     ims = h.get("if-modified-since")
     not_modified = False
-    if inm is not None:                               # If-None-Match wins over If-Modified-Since
+    if inm is not None:                            
         tags = [t.strip() for t in inm.split(",")]
         tags = [t[2:] if t.startswith("W/") else t for t in tags]
         not_modified = ("*" in tags) or (etag in tags)
@@ -143,7 +143,7 @@ def serve_connection(args, root, conn, addr):
     rfile = None
     try:
         conn.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
-        conn.settimeout(args.timeout)                # idle keep-alive timeout
+        conn.settimeout(args.timeout)             
         rfile = conn.makefile("rb")
         while True:
             try:
@@ -161,7 +161,7 @@ def serve_connection(args, root, conn, addr):
             conn.sendall(resp)
             if not keep:
                 break
-    except OSError:                                   # timeout, reset, broken pipe
+    except OSError:                                  
         pass
     finally:
         if rfile:
