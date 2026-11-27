@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""Summarise result CSVs (page-load CSVs from client.py, or ab CSVs from run_ab.sh).
-Usage: python3 experiments/summarize.py FILE.csv [FILE2.csv ...] [--out summary.csv]"""
+"""summarise result CSVs (page-load CSVs from client.py or ab CSVs from run_ab.sh)"""
 import argparse
 import csv
 import statistics
@@ -12,7 +11,7 @@ def mean_sd(v):
 
 
 def model_rtts(label, mode):
-    """Textbook model: RTTs needed for 21 requests fetched one at a time."""
+    """textbook model:RTTs needed for 21 requests fetched one at a time"""
     if label.startswith("direct"):
         return 42 if mode == "nonpersistent" else 22
     if label == "proxy_empty":
