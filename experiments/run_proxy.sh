@@ -1,6 +1,5 @@
 #!/bin/bash
-# Usage: sudo ./experiments/run_proxy.sh [runs]     (default 5 runs per case)
-# Needs: topology up, origin server running (origin ns), proxy running (proxy ns) with --ttl 3600.
+# needs topology up, origin server running (origin ns), proxy running (proxy ns) with --ttl 3600
 if [ "$EUID" -ne 0 ]; then echo "Run with sudo"; exit 1; fi
 cd "$(dirname "$0")/.."
 RUNS=${1:-5}
