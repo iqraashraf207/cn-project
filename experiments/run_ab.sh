@@ -1,7 +1,6 @@
 #!/bin/bash
-# Usage: sudo ./experiments/run_ab.sh server|proxy
-# Needs: topology up, origin server running. For 'proxy' also the proxy running (use --ttl 3600).
-# Runs ab from the client namespace at RTT 0 (so the result is server/proxy speed, not delay).
+# needs topology up, origin server running. for 'proxy' also the proxy running (use --ttl 3600)
+# runs ab from the client namespace at RTT 0 so the result is server/proxy speed and not delay
 if [ "$EUID" -ne 0 ]; then echo "Run with sudo"; exit 1; fi
 cd "$(dirname "$0")/.."
 TARGET=$1
