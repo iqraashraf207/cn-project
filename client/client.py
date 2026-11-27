@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
-"""Page-load client on plain sockets.
-Loads index.html, then fetches every embedded object ONE AT A TIME.
-Modes:  nonpersistent = new TCP connection + 'Connection: close' for every request
-        persistent    = one TCP connection reused (HTTP/1.1 keep-alive)
---proxy HOST:PORT sends absolute-URI requests to a caching proxy instead of the origin."""
+"""page-load client on plain sockets
+loads index.html then fetches every embedded object ONE AT A TIME.
+Modes:nonpersistent=new TCP connection+'Connection:close' for every request, persistent=one TCP connection reused(HTTP/1.1 keep-alive)
+--proxy HOST:PORT sends absolute-URI requests to a caching proxy instead of the origin"""
 import argparse
 import csv
 import os
@@ -37,7 +36,7 @@ def read_response(rfile):
         if len(body) != n:
             raise OSError("short body")
     else:
-        body = rfile.read()                       # read until the server closes
+        body = rfile.read()             #read until the server closes
         headers["connection"] = "close"
     return status, headers, body
 
@@ -47,8 +46,8 @@ class Client:
         self.host, self.port = host, port
         self.sock = None
         self.rfile = None
-        self.connections = 0                      # number of TCP connections opened
-        self.uses = 0                             # requests served on the current connection
+        self.connections = 0              #number of TCP connections opened
+        self.uses = 0                  #requests served on the current connection
 
     def _open(self):
         self.sock = socket.create_connection((self.host, self.port), timeout=30)
@@ -77,7 +76,7 @@ class Client:
                 status, headers, body = read_response(self.rfile)
             except (OSError, ValueError):
                 self.close()
-                if reused and attempt == 0:       # server closed an idle connection: retry once
+                if reused and attempt == 0:    #server closed an idle connection: retry once
                     continue
                 raise
             self.uses += 1
